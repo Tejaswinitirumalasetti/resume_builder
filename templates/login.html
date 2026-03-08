@@ -1,32 +1,80 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-5">
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white text-center">
-                <h4>Login</h4>
+
+<style>
+.login-bg{
+    background-image: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f");
+    background-size: cover;
+    background-position: center;
+    min-height: 90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.login-card{
+    background: rgba(255,255,255,0.9);
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.login-title{
+    color:#5a3ec8;
+    font-weight:700;
+}
+
+.login-btn{
+    background: linear-gradient(135deg,#6a5af9,#8b6dfc);
+    border:none;
+}
+
+.login-btn:hover{
+    background: linear-gradient(135deg,#5848e5,#725df0);
+}
+
+.form-control:focus{
+    border-color:#6a5af9;
+    box-shadow:0 0 5px rgba(106,90,249,0.5);
+}
+</style>
+
+
+<div class="login-bg">
+
+    <div class="col-lg-4 col-md-6 col-sm-10">
+
+        <div class="login-card">
+
+            <div class="text-center mb-4">
+                <h3 class="login-title">Welcome Back</h3>
+                <p class="text-muted">Login to continue building your resume</p>
             </div>
-            <div class="card-body">
 
-                <form method="POST">
-                    {% csrf_token %}
+            <form method="POST">
+                {% csrf_token %}
 
-                    <div class="mb-3">
-                        <label>Username</label>
-                        <input type="text" name="username" class="form-control" required>
-                    </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Username</label>
+                    <input type="text" name="username" class="form-control form-control-lg" required>
+                </div>
 
-                    <div class="mb-3">
-                        <label>Password</label>
-                        <input type="password" name="password" class="form-control" required>
-                    </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Password</label>
+                    <input type="password" name="password" class="form-control form-control-lg" required>
+                </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
-                </form>
+                <button type="submit" class="btn login-btn text-white btn-lg w-100">
+                    Login
+                </button>
 
-            </div>
+            </form>
+
         </div>
+
     </div>
+
 </div>
+
 {% endblock %}

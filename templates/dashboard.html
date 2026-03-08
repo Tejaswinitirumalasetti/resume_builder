@@ -2,44 +2,125 @@
 
 {% block content %}
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold">Welcome, {{ request.user.username }}</h2>
-    <a href="/create/" class="btn btn-primary">
-        + Create New Resume
-    </a>
+<style>
+
+.dashboard-bg{
+    background-image: url("https://images.unsplash.com/photo-1499951360447-b19be8fe80f5");
+    background-size: cover;
+    background-position: center;
+    min-height: 90vh;
+    padding:40px 0;
+}
+
+.dashboard-overlay{
+    background: rgba(255,255,255,0.92);
+    padding:30px;
+    border-radius:12px;
+}
+
+.resume-card{
+    border:none;
+    border-radius:12px;
+    transition: all 0.3s ease;
+}
+
+.resume-card:hover{
+    transform: translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.create-btn{
+    background: linear-gradient(135deg,#6a5af9,#8b6dfc);
+    border:none;
+}
+
+.create-btn:hover{
+    background: linear-gradient(135deg,#5848e5,#725df0);
+}
+
+.download-btn{
+    border-radius:8px;
+}
+
+</style>
+
+
+<div class="dashboard-bg">
+
+<div class="container dashboard-overlay">
+
+
+<!-- Header -->
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+
+<div>
+<h2 class="fw-bold">Welcome, {{ request.user.username }}</h2>
+<p class="text-muted mb-0">Manage and download your resumes</p>
+</div>
+
+<a href="/create/" class="btn create-btn text-white btn-lg mt-2 mt-md-0">
++ Create New Resume
+</a>
+
 </div>
 
 <hr>
 
-<h4 class="mb-4">Your Resumes</h4>
+
+<h4 class="mb-4 fw-semibold">Your Resumes</h4>
+
 
 <div class="row">
-    {% for resume in resumes %}
-        <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title fw-bold">{{ resume.title }}</h5>
 
-                    <p class="card-text text-muted">
-                        {{ resume.summary|truncatewords:20 }}
-                    </p>
+{% for resume in resumes %}
 
-                    <div class="mt-auto">
-                        <a href="/export/{{ resume.id }}/"
-                           class="btn btn-outline-success btn-sm w-100">
-                            Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% empty %}
-        <div class="col-12">
-            <div class="alert alert-info">
-                No resumes yet. Click "Create New Resume" to get started.
-            </div>
-        </div>
-    {% endfor %}
+<div class="col-md-4 col-sm-6 mb-4">
+
+<div class="card resume-card shadow-sm h-100">
+
+<div class="card-body d-flex flex-column">
+
+<h5 class="card-title fw-bold">{{ resume.title }}</h5>
+
+<p class="card-text text-muted">
+{{ resume.summary|truncatewords:20 }}
+</p>
+
+<div class="mt-auto">
+
+<a href="/export/{{ resume.id }}/"
+class="btn btn-outline-success download-btn btn-sm w-100">
+
+Download PDF
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12">
+
+<div class="alert alert-info text-center">
+
+No resumes yet. Click "Create New Resume" to get started.
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
 </div>
 
 {% endblock %}

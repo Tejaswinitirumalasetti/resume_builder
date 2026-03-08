@@ -150,6 +150,7 @@ def create_resume(request):
 # =========================
 # Export PDF (ReportLab)
 # =========================
+from reportlab.platypus import ListFlowable, ListItem
 @login_required
 def export_pdf(request, resume_id):
     resume = Resume.objects.get(id=resume_id, user=request.user)
@@ -213,36 +214,55 @@ def export_pdf(request, resume_id):
     skills = Skill.objects.filter(resume=resume)
     if skills.exists():
         elements.append(Paragraph("Skills", section_style))
-        skill_text = ", ".join([skill.name for skill in skills])
+        skill_text = ", ".join([skill.name for skill in skills]).replace("\n", "<br/>")
         elements.append(Paragraph(skill_text, normal_style))
 
+    
+
     # ===== EDUCATION =====
+        # ===== EDUCATION =====
     educations = Education.objects.filter(resume=resume)
     if educations.exists():
         elements.append(Paragraph("Education", section_style))
+        
         for edu in educations:
-            elements.append(Paragraph(edu.institution, normal_style))
+            text = edu.institution.replace("\n", "<br/>")
+            elements.append(Paragraph(text, normal_style))
+            elements.append(Spacer(1, 6))
 
     # ===== EXPERIENCE =====
+        # ===== EXPERIENCE =====
     experiences = Experience.objects.filter(resume=resume)
     if experiences.exists():
         elements.append(Paragraph("Experience", section_style))
+        
         for exp in experiences:
-            elements.append(Paragraph(exp.description, normal_style))
+            text = exp.description.replace("\n", "<br/>")
+            elements.append(Paragraph(text, normal_style))
+            elements.append(Spacer(1, 6))
 
     # ===== PROJECTS =====
+        # ===== PROJECTS =====
     projects = Project.objects.filter(resume=resume)
     if projects.exists():
         elements.append(Paragraph("Projects", section_style))
+        
         for project in projects:
-            elements.append(Paragraph(project.description, normal_style))
+            text = project.description.replace("\n", "<br/>")
+            elements.append(Paragraph(text, normal_style))
+            elements.append(Spacer(1, 6))
+
 
     # ===== CERTIFICATIONS =====
+        # ===== CERTIFICATIONS =====
     certifications = Certification.objects.filter(resume=resume)
     if certifications.exists():
         elements.append(Paragraph("Certifications", section_style))
+        
         for cert in certifications:
-            elements.append(Paragraph(cert.name, normal_style))
+            text = cert.name.replace("\n", "<br/>")
+            elements.append(Paragraph(text, normal_style))
+            elements.append(Spacer(1, 6))
 
     doc.build(elements)
     return response
