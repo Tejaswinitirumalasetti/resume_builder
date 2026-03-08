@@ -1,150 +1,145 @@
 {% extends "base.html" %}
 
+{% block page_container %}
+
 {% block content %}
 
 <style>
-.page-bg{
-    background: linear-gradient(135deg,#f5f7fa,#e4ecff);
-    min-height:90vh;
-    padding-top:40px;
+    .page-bg{
+    background: url("https://images.template.net/518279/Clean-Background-Resume-Cover-Page-Template-edit-online.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding-top: 40px;
 }
 
-.section-title{
-    font-weight:600;
-    color:#3a4cb1;
-    margin-bottom:10px;
-}
+    .section-title {
+        font-weight: 600;
+        color: #3a4cb1;
+        margin-bottom: 10px;
+    }
 
-.form-card{
-    border-radius:12px;
-    border:none;
-}
+    .form-card {
+        border-radius: 12px;
+        border: none;
+    }
 
-.form-control:focus{
-    border-color:#6a5af9;
-    box-shadow:0 0 5px rgba(106,90,249,0.4);
-}
+    .form-control:focus {
+        border-color: #6a5af9;
+        box-shadow: 0 0 5px rgba(106, 90, 249, 0.4);
+    }
 
-.save-btn{
-    background: linear-gradient(135deg,#6a5af9,#8b6dfc);
-    border:none;
-}
+    .save-btn {
+        background: linear-gradient(135deg, #6a5af9, #8b6dfc);
+        border: none;
+    }
 
-.save-btn:hover{
-    background: linear-gradient(135deg,#5848e5,#725df0);
-}
+    .save-btn:hover {
+        background: linear-gradient(135deg, #5848e5, #725df0);
+    }
 </style>
 
 
 <div class="page-bg">
 
-<div class="container">
+    <div class="container">
 
-<div class="row justify-content-center">
-<div class="col-md-10 col-lg-8">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
 
-<div class="card shadow-lg form-card">
+                <div class="card shadow-lg form-card">
 
-<div class="card-body p-4">
+                    <div class="card-body p-4">
 
-<h2 class="text-center mb-4">Create Your Resume</h2>
+                        <h2 class="text-center mb-4">Create Your Resume</h2>
 
-<form method="POST">
-{% csrf_token %}
+                        <form method="POST">
+                            {% csrf_token %}
 
-<!-- Resume Title -->
-<div class="mb-4">
-<label class="form-label fw-bold">Resume Title</label>
-<input type="text" name="title" class="form-control form-control-lg" placeholder="Example: Full Stack Developer" required>
+                            <!-- Resume Title -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Resume Title</label>
+                                <input type="text" name="title" class="form-control form-control-lg"
+                                    placeholder="Example: Full Stack Developer" required>
+                            </div>
+
+
+                            <!-- Personal Info -->
+                            <div class="card shadow-sm mb-4 p-3">
+                                <h5 class="section-title">Personal Information</h5>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" name="full_name" class="form-control" required>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" name="email" class="form-control" required>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Phone</label>
+                                        <input type="text" name="phone" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Summary -->
+                            <div class="card shadow-sm mb-4 p-3">
+                                <h5 class="section-title">Professional Summary</h5>
+                                <textarea name="summary" class="form-control" rows="3"
+                                    placeholder="Write a short professional summary..." required></textarea>
+                            </div>
+                            <!-- Skills -->
+                            <div class="card shadow-sm mb-4 p-3">
+                                <h5 class="section-title">Skills</h5>
+                                <textarea name="skills" class="form-control" rows="2"
+                                    placeholder="Example: Python, Django, HTML, CSS"></textarea>
+                            </div>
+                            <!-- Education -->
+                            <div class="card shadow-sm mb-4 p-3">
+                                <h5 class="section-title">Education</h5>
+                                <textarea name="education" class="form-control" rows="3"
+                                    placeholder="Enter education details"></textarea>
+                            </div>
+                            <!-- Experience -->
+                            <div class="card shadow-sm mb-4 p-3">
+                                <h5 class="section-title">Experience</h5>
+                                <textarea name="experience" class="form-control" rows="3"
+                                    placeholder="Enter work experience"></textarea>
+                            </div>
+                            <!-- Certifications -->
+                            <div class="card shadow-sm mb-4 p-3">
+                                <h5 class="section-title">Certifications</h5>
+                                <textarea name="certifications" class="form-control" rows="3"></textarea>
+                            </div>
+                            <!-- Projects -->
+                            <div class="card shadow-sm mb-4 p-3">
+                                <h5 class="section-title">Projects</h5>
+                                <textarea name="projects" class="form-control" rows="3"
+                                    placeholder="Enter project details"></textarea>
+                            </div>
+                            <!-- Buttons -->
+                            <div class="d-flex justify-content-between mt-4">
+                                <a href="/dashboard/" class="btn btn-outline-secondary btn-lg">
+                                    Back
+                                </a>
+
+                                <button type="submit" class="btn save-btn text-white btn-lg">
+                                    Save Resume
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
-
-
-<!-- Personal Info -->
-<div class="card shadow-sm mb-4 p-3">
-<h5 class="section-title">Personal Information</h5>
-
-<div class="mb-3">
-<label class="form-label">Full Name</label>
-<input type="text" name="full_name" class="form-control" required>
-</div>
-
-<div class="row">
-<div class="col-md-6 mb-3">
-<label class="form-label">Email</label>
-<input type="email" name="email" class="form-control" required>
-</div>
-
-<div class="col-md-6 mb-3">
-<label class="form-label">Phone</label>
-<input type="text" name="phone" class="form-control" required>
-</div>
-</div>
-</div>
-
-
-<!-- Summary -->
-<div class="card shadow-sm mb-4 p-3">
-<h5 class="section-title">Professional Summary</h5>
-<textarea name="summary" class="form-control" rows="3" placeholder="Write a short professional summary..." required></textarea>
-</div>
-
-
-<!-- Skills -->
-<div class="card shadow-sm mb-4 p-3">
-<h5 class="section-title">Skills</h5>
-<textarea name="skills" class="form-control" rows="2" placeholder="Example: Python, Django, HTML, CSS"></textarea>
-</div>
-
-
-<!-- Education -->
-<div class="card shadow-sm mb-4 p-3">
-<h5 class="section-title">Education</h5>
-<textarea name="education" class="form-control" rows="3" placeholder="Enter education details"></textarea>
-</div>
-
-
-<!-- Experience -->
-<div class="card shadow-sm mb-4 p-3">
-<h5 class="section-title">Experience</h5>
-<textarea name="experience" class="form-control" rows="3" placeholder="Enter work experience"></textarea>
-</div>
-
-
-<!-- Certifications -->
-<div class="card shadow-sm mb-4 p-3">
-<h5 class="section-title">Certifications</h5>
-<textarea name="certifications" class="form-control" rows="3"></textarea>
-</div>
-
-
-<!-- Projects -->
-<div class="card shadow-sm mb-4 p-3">
-<h5 class="section-title">Projects</h5>
-<textarea name="projects" class="form-control" rows="3" placeholder="Enter project details"></textarea>
-</div>
-
-
-<!-- Buttons -->
-<div class="d-flex justify-content-between mt-4">
-<a href="/dashboard/" class="btn btn-outline-secondary btn-lg">
-Back
-</a>
-
-<button type="submit" class="btn save-btn text-white btn-lg">
-Save Resume
-</button>
-</div>
-
-</form>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-
-</div>
-
+{% endblock %}
 {% endblock %}
